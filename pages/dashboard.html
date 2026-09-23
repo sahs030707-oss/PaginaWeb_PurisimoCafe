@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — PurísimoCafe</title>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+  <link rel="stylesheet" href="../assets/css/components.css"/>
+  <link rel="stylesheet" href="../assets/css/sidebar.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="brand-icon">
+          <img src="../assets/IMG/LogoBlancoPC.png" class="image">
+        </span>
+        <div><div class="brand-name">PurísimoCafe</div><div class="brand-sub">Sistema de Gestión</div></div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">P</div>
+      <div class="user-info">
+        <div class="user-name" id="user-name">Usuario</div>
+        <div class="user-role" id="user-role">Rol</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">General</div>
+      <div class="nav-item active" data-page="dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</div>
+      <div class="nav-item" data-page="mesas.html" onclick="navigate('mesas.html')"><i class="fas fa-utensils"></i> Mesas</div>
+      <div class="nav-section">Operaciones</div>
+      <div class="nav-item" data-page="ventas.html" onclick="navigate('ventas.html')"><i class="fas fa-cash-register"></i> Nueva Venta</div>
+      <div class="nav-item" data-page="historial.html" onclick="navigate('historial.html')"><i class="fas fa-receipt"></i> Historial Ventas</div>
+      <div class="nav-section">Inventario</div>
+      <div class="nav-item" data-page="inventario.html" data-admin-only onclick="navigate('inventario.html')"><i class="fas fa-boxes-stacked"></i> Inventario</div>
+      <div class="nav-item" data-page="movimientos.html" data-admin-only onclick="navigate('movimientos.html')"><i class="fas fa-arrow-trend-down"></i> Movimientos</div>
+      <div class="nav-section">Catálogo</div>
+      <div class="nav-item" data-page="productos.html" onclick="navigate('productos.html')"><i class="fas fa-mug-hot"></i> Productos</div>
+      <div class="nav-item" data-page="categorias.html" onclick="navigate('categorias.html')"><i class="fas fa-tags"></i> Categorías</div>
+      <div class="nav-section">Administración</div>
+      <div class="nav-item" data-page="usuarios.html" data-admin-only onclick="navigate('usuarios.html')"><i class="fas fa-users"></i> Usuarios</div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" id="btn-logout"><i class="fas fa-right-from-bracket"></i> Cerrar Sesión</button>
+    </div>
+  </aside>
+  <div class="overlay-mobile" id="overlay-mobile"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+        <span class="topbar-title" id="topbar-title">Dashboard</span>
+      </div>
+      <div class="topbar-right"><span class="topbar-date" id="topbar-date"></span></div>
+    </header>
+
+    <div class="page-content anim-fade-up">
+
+      <!-- BIENVENIDA -->
+      <div class="welcome-banner">
+        <div>
+          <h2>Bienvenido, <span id="dash-user">Usuario</span> 👋</h2>
+          <p id="dash-date"></p>
+        </div>
+      </div>
+
+      <!-- KPIs RÁPIDOS (contadores base) -->
+      <div class="stats-grid" style="margin-bottom:12px;">
+        <div class="stat-card">
+          <div class="stat-icon brown"><i class="fas fa-mug-hot"></i></div>
+          <div><div class="stat-value" id="ds-productos">—</div><div class="stat-label">Productos activos</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-receipt"></i></div>
+          <div><div class="stat-value" id="ds-ventas">—</div><div class="stat-label">Ventas totales</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold"><i class="fas fa-cash-register"></i></div>
+          <div><div class="stat-value" id="ds-ventas-hoy">—</div><div class="stat-label">Ventas hoy</div></div>
+        </div>
+      </div>
+
+      <!-- KPIs FINANCIEROS DEL DÍA -->
+      <div class="stats-grid" style="margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-arrow-trend-up"></i></div>
+          <div><div class="stat-value" id="ds-ingresos-hoy">—</div><div class="stat-label">Ingresos hoy</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-arrow-trend-down"></i></div>
+          <div><div class="stat-value" id="ds-costos-hoy">—</div><div class="stat-label">Costos estimados hoy</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold"><i class="fas fa-sack-dollar"></i></div>
+          <div><div class="stat-value" id="ds-ganancia-hoy">—</div><div class="stat-label">Ganancia neta hoy</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon brown"><i class="fas fa-percent"></i></div>
+          <div><div class="stat-value" id="ds-margen-hoy">—</div><div class="stat-label">Margen del día</div></div>
+        </div>
+      </div>
+
+      <!-- POWER BI EMBED -->
+      <div class="table-wrap" style="margin-bottom:24px;">
+        <div class="table-toolbar">
+          <span style="font-weight:600;color:var(--cafe-brown);"><i class="fas fa-chart-pie" style="margin-right:6px;color:var(--cafe-gold);"></i>Análisis avanzado — Power BI</span>
+        </div>
+        <div id="powerbi-container" style="
+          width:100%; min-height:480px; background:var(--cafe-pale);
+          border-radius:var(--radius-sm); display:flex;
+          align-items:center; justify-content:center;
+          flex-direction:column; gap:12px; color:var(--cafe-warm);
+          font-size:.88rem; padding:32px; box-sizing:border-box;">
+          <iframe title="Dashboard" width="900" height="673.5" src="https://app.powerbi.com/view?r=eyJrIjoiYjU2ZGYwOWYtOWYzOS00ZjRmLWE4MjUtMjBiMzJlNjRiZDI2IiwidCI6ImU0NzY0NmZlLWRhMjctNDUxOC04NDM2LTVmOGIxNThiYTEyNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container"></div>
+<script src="../assets/js/core/api.js"></script>
+<script src="../assets/js/services/ProductoService.js"></script>
+<script src="../assets/js/services/VentaService.js"></script>
+<script src="../assets/js/core/ui.js"></script>
+<script src="../assets/js/modules/dashboard.js"></script>
+</body>
+</html>

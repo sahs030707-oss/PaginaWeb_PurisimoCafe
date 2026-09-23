@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PurísimoCafe</title>
+  <script>
+    // Redirige al dashboard si hay sesión, si no al login
+    const token = sessionStorage.getItem('pc_token');
+    window.location.href = token ? 'pages/dashboard.html' : 'pages/login.html';
+  </script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,93 @@
+.venta-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+    .productos-panel, .carrito-panel {
+      background: var(--cafe-white);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid rgba(124,74,30,.10);
+      box-shadow: var(--shadow-sm);
+    }
+    .carrito-panel { position:sticky; top:80px; }
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+      max-height: 460px;
+      overflow-y: auto;
+    }
+    .prod-card {
+      background: var(--cafe-pale);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      text-align: center;
+      transition: all .2s;
+    }
+    .prod-card:hover { border-color:var(--cafe-gold); background:rgba(200,133,58,.06); }
+    .prod-card.sin-stock { opacity:.45; pointer-events:none; }
+    .prod-card-icon  { font-size:1.5rem; margin-bottom:6px; }
+    .prod-card-name  { font-size:.82rem; font-weight:600; color:var(--cafe-brown); }
+    .prod-card-price { font-size:.88rem; color:var(--cafe-gold); font-weight:700; margin-top:3px; }
+    .prod-card-stock { font-size:.70rem; color:var(--cafe-warm); margin-top:2px; }
+    .carrito-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--cafe-brown);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .carrito-items { max-height:320px; overflow-y:auto; }
+    .carrito-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(124,74,30,.06);
+    }
+    .carrito-item-info { flex:1; min-width:0; }
+    .carrito-item-name  { font-size:.84rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .carrito-item-price { font-size:.76rem; color:var(--cafe-warm); }
+    .qty-ctrl { display:flex; align-items:center; gap:5px; }
+    .qty-btn {
+      width:24px; height:24px;
+      border-radius:6px;
+      border: 1px solid rgba(124,74,30,.2);
+      background: var(--cafe-pale);
+      font-weight:700; font-size:.85rem;
+      transition: background .15s;
+    }
+    .qty-btn:hover { background:var(--cafe-cream); }
+    .qty-val { font-size:.85rem; font-weight:600; min-width:20px; text-align:center; }
+    .item-subtotal { font-size:.84rem; font-weight:700; min-width:64px; text-align:right; }
+    .btn-remove-item { background:none; border:none; color:var(--color-danger); font-size:.82rem; padding:2px 4px; }
+    .carrito-total { margin-top:14px; padding-top:12px; border-top:2px solid var(--cafe-cream); }
+    .total-row { display:flex; justify-content:space-between; font-size:.88rem; margin-bottom:5px; color:var(--cafe-warm); }
+    .total-row.grand { font-size:1.1rem; font-weight:700; color:var(--cafe-dark); }
+    .empty-cart { text-align:center; padding:24px 0; color:var(--cafe-warm); font-size:.85rem; }
+
+    /* FACTURA PRINT */
+    @media print {
+      body * { visibility:hidden !important; }
+      #factura-print, #factura-print * { visibility:visible !important; }
+      #factura-print {
+        position:fixed !important; inset:0 !important;
+        padding:32px !important;
+        background:white !important;
+        font-family:'DM Sans',sans-serif;
+        font-size:12px; color:#000;
+      }
+    }
+    #factura-print { display:none; }
+
+    @media (max-width:860px) {
+      .venta-layout { grid-template-columns:1fr; }
+      .carrito-panel { position:static; }
+    }

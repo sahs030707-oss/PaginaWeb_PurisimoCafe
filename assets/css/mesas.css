@@ -1,0 +1,24 @@
+.mesas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .mesa-card {
+      background: var(--cafe-white);
+      border-radius: var(--radius);
+      padding: 22px 16px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-sm);
+      transition: all .2s;
+    }
+    .mesa-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+    .mesa-card.disponible { border-color:rgba(74,124,89,.3); }
+    .mesa-card.ocupada    { border-color:rgba(139,32,32,.3); background:#fff8f8; }
+    .mesa-icon  { font-size:2rem; margin-bottom:8px; }
+    .mesa-num   { font-family:var(--font-display); font-size:1rem; color:var(--cafe-brown); font-weight:700; }
+    .mesa-status { font-size:.72rem; font-weight:600; margin-top:4px; }
+    .mesa-status.ok   { color:var(--color-success); }
+    .mesa-status.busy { color:var(--color-danger); }
+    .mesa-nota { font-size:.7rem; color:var(--cafe-warm); margin-top:4px; }
